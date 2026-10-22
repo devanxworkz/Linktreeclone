@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WhatsApp Setup Guide — ChatIQ</title>
+  <meta name="description" content="Complete step-by-step guide to connect your WhatsApp Business to ChatIQ using the official WhatsApp Cloud API." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .setup-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      margin-bottom: 20px;
+      transition: all 0.3s;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .setup-step:hover {
+      border-color: rgba(37, 211, 102, 0.2);
+      box-shadow: var(--shadow-md);
+    }
+    .setup-step-number {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: var(--radius-sm);
+      background: var(--primary-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .setup-step-content { flex: 1; }
+    .setup-step-content h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .setup-step-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+    .setup-step-content ul { margin: 8px 0 0 20px; }
+    .setup-step-content ul li { font-size: 14px; color: var(--text-secondary); line-height: 1.8; list-style: disc; }
+    .credential-box {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 8px 0;
+    }
+    .credential-box code { color: var(--primary-dark); font-weight: 600; }
+    .credential-box .tag {
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--primary-subtle);
+      color: var(--primary-dark);
+      padding: 2px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      font-family: var(--font-sans);
+    }
+    .prereq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; }
+    .prereq-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .prereq-icon {
+      width: 36px; height: 36px; min-width: 36px;
+      border-radius: 50%;
+      background: var(--primary-subtle);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--primary); font-size: 16px;
+    }
+    .prereq-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .prereq-card p { font-size: 13px; color: var(--text-secondary); }
+    @media (max-width: 768px) {
+      .prereq-grid { grid-template-columns: 1fr; }
+      .setup-step { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-icon"><i class="fab fa-whatsapp"></i></span> ChatIQ
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="whatsapp-setup.html">Integrations</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://github-com-whatsapp-crm-wacrm-ezpc.vercel.app/login" class="btn btn-secondary btn-sm">Log In</a>
+      <a href="https://github-com-whatsapp-crm-wacrm-ezpc.vercel.app/signup" class="btn btn-primary btn-sm">Start Free Trial</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="container">
+    <nav style="display:flex;gap:8px;font-size:14px;color:var(--text-muted);margin-bottom:12px;flex-wrap:wrap;">
+      <a href="index.html" style="color:var(--text-secondary);">Home</a>
+      <span style="color:var(--text-muted);">›</span>
+      <span style="color:var(--text-primary);font-weight:500;">WhatsApp Setup Guide</span>
+    </nav>
+    <span class="section-label">Integration</span>
+    <h1>WhatsApp Cloud API Setup Guide</h1>
+    <p>Follow this step-by-step guide to connect your WhatsApp Business to ChatIQ. The process takes approximately 10–15 minutes.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Prerequisites</span>
+      <h2 class="section-title">What You Need Before Starting</h2>
+      <p class="section-subtitle" style="margin-bottom:32px;">Ensure you have these ready before beginning the setup process.</p>
+    </div>
+    <div class="prereq-grid">
+      <div class="prereq-card reveal">
+        <div class="prereq-icon"><i class="fab fa-facebook"></i></div>
+        <div><h4>Facebook Personal Account</h4><p>A personal Facebook account to access Meta's Business and Developer platforms.</p></div>
+      </div>
+      <div class="prereq-card reveal">
+        <div class="prereq-icon"><i class="fas fa-building"></i></div>
+        <div><h4>Meta Business Account</h4><p>Free to create at business.facebook.com. Required for WhatsApp API access.</p></div>
+      </div>
+      <div class="prereq-card reveal">
+        <div class="prereq-icon"><i class="fab fa-whatsapp"></i></div>
+        <div><h4>WhatsApp Business Number</h4><p>A phone number registered with WhatsApp Business. Can be your existing number migrated.</p></div>
+      </div>
+      <div class="prereq-card reveal">
+        <div class="prereq-icon"><i class="fas fa-globe"></i></div>
+        <div><h4>Internet Connection</h4><p>Stable internet access to navigate the Meta Developer dashboard.</p></div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:64px;">
+      <span class="section-label">Step-by-Step</span>
+      <h2 class="section-title">Connection Process</h2>
+      <p class="section-subtitle" style="margin-bottom:32px;">Follow these 7 steps to connect your WhatsApp Business to ChatIQ.</p>
+    </div>
+
+    <div class="setup-step reveal">
+      <div class="setup-step-number">1</div>
+      <div class="setup-step-content">
+        <h3>Create a Meta Business Account</h3>
+        <p>If you do not already have a Meta Business Account, go to <strong>business.facebook.com</strong> and create one. This is a free account that lets you manage your business assets including WhatsApp.</p>
+        <ul>
+          <li>Visit <strong>business.facebook.com</strong> and click "Create Account"</li>
+          <li>Enter your business name, email address, and other details</li>
+          <li>Verify your email and complete the setup</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="setup-step reveal">
+      <div class="setup-step-number">2</div>
+      <div class="setup-step-content">
+        <h3>Create a Meta Developer App</h3>
+        <p>Go to the <strong>Meta Developer Portal</strong> (developers.facebook.com) and create a new app. This app will serve as the container for your WhatsApp API integration.</p>
+        <ul>
+          <li>Go to <strong>developers.facebook.com</strong> and click "My Apps"</li>
+          <li>Click "Create App" and select "Business" as the app type</li>
+          <li>Give your app a name (e.g., "ChatIQ Integration")</li>
+          <li>Select your Meta Business Account and click "Create App"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="setup-step reveal">
+      <div class="setup-step-number">3</div>
+      <div class="setup-step-content">
+        <h3>Enable WhatsApp Cloud API</h3>
+        <p>Within your Developer App, add the WhatsApp Cloud API product. This will connect your app to WhatsApp's messaging infrastructure.</p>
+        <ul>
+          <li>In your app dashboard, click "Add Product"</li>
+          <li>Find "WhatsApp Cloud API" and click "Set Up"</li>
+          <li>Select your Meta Business Account when prompted</li>
+          <li>Register your WhatsApp Business phone number</li>
+          <li>Verify your business phone number with the code sent via SMS or call</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="setup-step reveal">
+      <div class="setup-step-number">4</div>
+      <div class="setup-step-content">
+        <h3>Generate Your Access Credentials</h3>
+        <p>In the WhatsApp Cloud API settings, you will find three critical pieces of information that you need to copy.</p>
+        <div style="margin-top:16px;">
+          <div class="credential-box">
+            <span><span class="tag">Access Token</span> <code>EAAC... (long string)</code></span>
+            <span style="font-size:11px;color:var(--text-muted);">Click "Copy" in dashboard</span>
+          </div>
+          <div class="credential-box">
+            <span><span class="tag">Phone Number ID</span> <code>123456789012345</code></span>
+            <span style="font-size:11px;color:var(--text-muted);">Numeric ID</span>
+          </div>
+          <div class="credential-box">
+            <span><span class="tag">WABA ID</span> <code>987654321098765</code></span>
+            <span style="font-size:11px;color:var(--text-muted);">WhatsApp Business Account ID</span>
+          </div>
+        </div>
+        <p style="margin-top:12px;">Keep these credentials secure. They are used to authenticate ChatIQ with your WhatsApp account.</p>
+      </div>
+    </div>
+
+    <div class="setup-step reveal">
+      <div class="setup-step-number">5</div>
+      <div class="setup-step-content">
+        <h3>Paste Credentials into ChatIQ</h3>
+        <p>Log in to your ChatIQ account and navigate to <strong>Settings &gt; WhatsApp Integration</strong>. Paste the three credentials you copied from the Meta Developer dashboard.</p>
+        <ul>
+          <li>Log in to <strong>ChatIQ</strong> and go to <strong>Settings</strong></li>
+          <li>Click on <strong>WhatsApp Integration</strong></li>
+          <li>Paste the <strong>Access Token</strong> in the first field</li>
+          <li>Paste the <strong>Phone Number ID</strong> in the second field</li>
+          <li>Paste the <strong>WABA ID</strong> in the third field</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="setup-step reveal">
+      <div class="setup-step-number">6</div>
+      <div class="setup-step-content">
+        <h3>Save Configuration</h3>
+        <p>Click the <strong>Save Configuration</strong> button in ChatIQ. The platform will verify your credentials and establish a connection with the WhatsApp Cloud API.</p>
+        <ul>
+          <li>Click <strong>Save Configuration</strong></li>
+          <li>Wait for the verification process (usually takes a few seconds)</li>
+          <li>You will see a <strong>Connected</strong> confirmation message</li>
+          <li>Your WhatsApp messages will begin syncing to ChatIQ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="setup-step reveal">
+      <div class="setup-step-number">7</div>
+      <div class="setup-step-content">
+        <h3>Start Sending and Receiving Messages</h3>
+        <p>Your ChatIQ is now connected to WhatsApp. You can start managing customer conversations from the shared inbox, set up automations, and run campaigns.</p>
+        <ul>
+          <li>Go to the <strong>Inbox</strong> to view your WhatsApp conversations</li>
+          <li>Invite team members to collaborate on messages</li>
+          <li>Create message templates for common responses</li>
+          <li>Set up automation workflows for routine tasks</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="reveal" style="text-align:center;margin-top:48px;padding:40px;background:var(--bg-light);border-radius:var(--radius-md);border:1px solid var(--border);">
+      <h3 style="font-size:20px;margin-bottom:12px;">Need Help?</h3>
+      <p style="color:var(--text-secondary);margin-bottom:20px;">Our support team can guide you through the setup process. We are here to help.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn-primary">Contact Support</a>
+        <a href="https://github-com-whatsapp-crm-wacrm-ezpc.vercel.app/signup" class="btn btn-secondary">Start Free Trial</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Credentials Explained</span>
+      <h2 class="section-title">Understanding Your WhatsApp API Credentials</h2>
+      <p class="section-subtitle mx-auto" style="margin-bottom:40px;">Learn what each credential does and where to find it in the Meta Developer Dashboard.</p>
+    </div>
+    <div class="grid-3" style="margin-bottom:48px;">
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-key"></i></div>
+        <h3>Access Token</h3>
+        <p>A long alphanumeric string that authorizes ChatIQ to send and receive messages on behalf of your WhatsApp Business account. It acts as a secure password for API access.</p>
+        <p style="margin-top:8px;font-size:13px;color:var(--text-muted);"><strong>Where to find:</strong> WhatsApp &gt; Getting Started &gt; Access Token</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-phone"></i></div>
+        <h3>Phone Number ID</h3>
+        <p>A unique numeric identifier assigned to your WhatsApp Business phone number. The API uses this ID to route messages to and from your specific number.</p>
+        <p style="margin-top:8px;font-size:13px;color:var(--text-muted);"><strong>Where to find:</strong> WhatsApp &gt; Getting Started &gt; Phone Number ID</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-id-card"></i></div>
+        <h3>WABA ID</h3>
+        <p>The WhatsApp Business Account ID is a unique identifier for your overall business account on WhatsApp Cloud API. It links all your phone numbers and message templates.</p>
+        <p style="margin-top:8px;font-size:13px;color:var(--text-muted);"><strong>Where to find:</strong> WhatsApp &gt; Getting Started &gt; WABA ID</p>
+      </div>
+    </div>
+
+    <div style="background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-md);padding:32px;" class="reveal">
+      <h3 style="font-size:18px;margin-bottom:16px;">Quick Tip: Setting Up a Test Number</h3>
+      <p style="color:var(--text-secondary);margin-bottom:12px;">You can use the test phone number provided by Meta in the Developer Dashboard to test the integration before using your real business number. This is useful for exploring ChatIQ's features without affecting your live conversations.</p>
+      <p style="color:var(--text-secondary);">The test number will appear in the <strong>Getting Started</strong> section of your WhatsApp Cloud API settings. You can use it alongside your actual business number during the testing phase.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="cta-title">Ready to Get Started?</h2>
+      <p class="cta-subtitle">Create your ChatIQ account today and connect WhatsApp in under 15 minutes.</p>
+      <div class="cta-actions">
+        <a href="https://github-com-whatsapp-crm-wacrm-ezpc.vercel.app/signup" class="btn btn-white btn-lg">Start Free Trial <i class="fas fa-arrow-right"></i></a>
+        <a href="contact.html" class="btn btn-outline-green btn-lg"><i class="fas fa-play-circle"></i> Book a Demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span class="nav-logo-icon"><i class="fab fa-whatsapp"></i></span> ChatIQ</a>
+        <p>The WhatsApp CRM and automation platform for modern businesses.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="whatsapp-setup.html">Integrations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="whatsapp-setup.html">Documentation</a></li>
+          <li><a href="contact.html">Support</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+          <li><a href="refund-policy.html">Refund Policy</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ChatIQ. All rights reserved.</p>
+      <p>Made with <i class="fas fa-heart" style="color:#25D366;"></i> in India</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

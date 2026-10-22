@@ -1,0 +1,143 @@
+﻿
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mC:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/server[39m
+
+npx : [90mstderr[2m | tests/public.test.ts[2m > [22m[2mpublic creator page[2m > [22m[2mis 404 until published, 
+then 200 with only published content
+At line:1 char:1
++ npx vitest run tests/public.test.ts 2>&1 | Out-File -Encoding utf8 .. ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([90mstderr[2m...blished content:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[22m[39m[error] error: column "is_active" does not exist
+    at ye.Ve (file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pg-protocol/src/par
+ser.ts:432:11)
+    at ye.nt (file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pg-protocol/src/par
+ser.ts:210:16)
+    at ye.parse (file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pg-protocol/src/
+parser.ts:102:25)
+    at pe.execProtocol 
+(file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pglite/src/pglite.ts:631:26)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at pe.l 
+(file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pglite/src/base.ts:130:12)
+    at file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pglite/src/base.ts:223:44 
+{
+  length: [33m109[39m,
+  severity: [32m'ERROR'[39m,
+  code: [32m'42703'[39m,
+  detail: [90mundefined[39m,
+  hint: [90mundefined[39m,
+  position: [32m'51'[39m,
+  internalPosition: [90mundefined[39m,
+  internalQuery: [90mundefined[39m,
+  where: [90mundefined[39m,
+  schema: [90mundefined[39m,
+  table: [90mundefined[39m,
+  column: [90mundefined[39m,
+  dataType: [90mundefined[39m,
+  constraint: [90mundefined[39m,
+  file: [32m'parse_relation.c'[39m,
+  line: [32m'3727'[39m,
+  routine: [32m'errorMissingColumn'[39m
+}
+
+[90mstderr[2m | tests/public.test.ts[2m > [22m[2mpublic creator page[2m > [22m[2mhides the page again after 
+unpublishing
+[22m[39m[error] error: column "is_active" does not exist
+    at ye.Ve (file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pg-protocol/src/par
+ser.ts:432:11)
+    at ye.nt (file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pg-protocol/src/par
+ser.ts:210:16)
+    at ye.parse (file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pg-protocol/src/
+parser.ts:102:25)
+    at pe.execProtocol 
+(file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pglite/src/pglite.ts:631:26)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at pe.l 
+(file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pglite/src/base.ts:130:12)
+    at file:///C:/Users/Umesh/OneDrive/Desktop/OpenIQWeb/node_modules/[4m@electric-sql[24m/pglite/src/base.ts:223:44 
+{
+  length: [33m109[39m,
+  severity: [32m'ERROR'[39m,
+  code: [32m'42703'[39m,
+  detail: [90mundefined[39m,
+  hint: [90mundefined[39m,
+  position: [32m'51'[39m,
+  internalPosition: [90mundefined[39m,
+  internalQuery: [90mundefined[39m,
+  where: [90mundefined[39m,
+  schema: [90mundefined[39m,
+  table: [90mundefined[39m,
+  column: [90mundefined[39m,
+  dataType: [90mundefined[39m,
+  constraint: [90mundefined[39m,
+  file: [32m'parse_relation.c'[39m,
+  line: [32m'3727'[39m,
+  routine: [32m'errorMissingColumn'[39m
+}
+
+ [31mΓ¥»[39m tests/public.test.ts [2m([22m[2m4 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[33m 9946[2mms[22m[39m
+[31m   [31m├ù[31m public creator page[2m > [22mis 404 until published, then 200 with only published content[33m 9010[2mms[22m[31m[39m
+[31m     ΓåÆ expected 200 "OK", got 500 "Internal Server Error"[39m
+[31m   [31m├ù[31m public creator page[2m > [22mhides the page again after unpublishing[33m 330[2mms[22m[31m[39m
+[31m     ΓåÆ expected 200 "OK", got 500 "Internal Server Error"[39m
+   [33m[2mΓ£ô[22m[39m public creator page[2m > [22mdoes not let a visitor read an unpublished creator [33m389[2mms[22m[39m
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1m[7m Failed Tests 2 [27m[22mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/public.test.ts[2m > [22mpublic creator page[2m > [22mis 404 until 
+published, then 200 with only published content
+[31m[1mError[22m: expected 200 "OK", got 500 "Internal Server Error"[39m
+[36m [2mΓ¥»[22m tests/public.test.ts:[2m39:56[22m[39m
+    [90m 37| [39m    [35mawait[39m 
+ag[33m.[39m[34mpost[39m([32m'/api/profile/publish'[39m)[33m.[39m[34msend[39m({ isPublished[33m:[39m 
+[35mtrue[39m })[33m.[39mΓÇª
+    [90m 38| [39m
+    [90m 39| [39m    [35mconst[39m page [33m=[39m [35mawait[39m 
+ag[33m.[39m[35mget[39m([32m'/api/public/publisher'[39m)[33m.[39m[34mexpect[39m([34m200[39m)[33m;[39m
+    [90m   | [39m                                                       [31m^[39m
+    [90m 40| [39m    [34mexpect[39m(page[33m.[39mbody[33m.[39mpage[33m.[39mdisplayName)[33m.[39m[34mtoBe[
+39m([32m'Publisher'[39m)[33m;[39m
+    [90m 41| [39m    [34mexpect[39m(page[33m.[39mbody[33m.[39mpage[33m.[39mlinks)[33m.[39m[34mtoHaveLength
+[39m([34m1[39m)[33m;[39m
+[90m [2mΓ¥»[22m Test._assertStatus ../node_modules/supertest/lib/test.js:[2m404:14[22m[39m
+[90m [2mΓ¥»[22m ../node_modules/supertest/lib/test.js:[2m460:13[22m[39m
+[90m [2mΓ¥»[22m Test._assertFunction ../node_modules/supertest/lib/test.js:[2m437:13[22m[39m
+[90m [2mΓ¥»[22m Test.assert ../node_modules/supertest/lib/test.js:[2m302:23[22m[39m
+[90m [2mΓ¥»[22m localAssert ../node_modules/supertest/lib/test.js:[2m220:38[22m[39m
+[90m [2mΓ¥»[22m Server.<anonymous> ../node_modules/supertest/lib/test.js:[2m227:13[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1/2]ΓÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/public.test.ts[2m > [22mpublic creator page[2m > [22mhides the page again 
+after unpublishing
+[31m[1mError[22m: expected 200 "OK", got 500 "Internal Server Error"[39m
+[36m [2mΓ¥»[22m tests/public.test.ts:[2m52:44[22m[39m
+    [90m 50| [39m    [35mconst[39m { agent[33m:[39m ag } [33m=[39m [35mawait[39m 
+[34mregisterUser[39m(app[33m,[39m { email[33m:[39m [32m'u@x.com'[39m[33m,[39m ΓÇª
+    [90m 51| [39m    [35mawait[39m 
+ag[33m.[39m[34mpost[39m([32m'/api/profile/publish'[39m)[33m.[39m[34msend[39m({ isPublished[33m:[39m 
+[35mtrue[39m })[33m.[39mΓÇª
+    [90m 52| [39m    [35mawait[39m 
+ag[33m.[39m[35mget[39m([32m'/api/public/togglepage'[39m)[33m.[39m[34mexpect[39m([34m200[39m)[33m;[39m
+    [90m   | [39m                                           [31m^[39m
+    [90m 53| [39m    [35mawait[39m 
+ag[33m.[39m[34mpost[39m([32m'/api/profile/publish'[39m)[33m.[39m[34msend[39m({ isPublished[33m:[39m 
+[35mfalse[39m })ΓÇª
+    [90m 54| [39m    [35mawait[39m 
+ag[33m.[39m[35mget[39m([32m'/api/public/togglepage'[39m)[33m.[39m[34mexpect[39m([34m404[39m)[33m;[39m
+[90m [2mΓ¥»[22m Test._assertStatus ../node_modules/supertest/lib/test.js:[2m404:14[22m[39m
+[90m [2mΓ¥»[22m ../node_modules/supertest/lib/test.js:[2m460:13[22m[39m
+[90m [2mΓ¥»[22m Test._assertFunction ../node_modules/supertest/lib/test.js:[2m437:13[22m[39m
+[90m [2mΓ¥»[22m Test.assert ../node_modules/supertest/lib/test.js:[2m302:23[22m[39m
+[90m [2mΓ¥»[22m localAssert ../node_modules/supertest/lib/test.js:[2m220:38[22m[39m
+[90m [2mΓ¥»[22m Server.<anonymous> ../node_modules/supertest/lib/test.js:[2m227:13[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[2/2]ΓÄ»[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m2 passed[39m[22m[90m (4)[39m
+[2m   Start at [22m 15:22:39
+[2m   Duration [22m 16.04s[2m (transform 1.65s, setup 0ms, collect 4.25s, tests 9.95s, environment 1ms, prepare 435ms)[22m
+

@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build output
+web/dist/
+server/dist/
+
+# Local data (PGlite files) and test databases
+.data/
+.e2e/
+
+# Environment files — never commit real secrets
+.env
+.env.*.local
+server/.env
+web/.env
+web/.env.production
+
+# Test / tooling artifacts
+test-results/
+playwright-report/
+blob-report/
+coverage/
+*.log
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

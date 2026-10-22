@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — ChatIQ</title>
+  <meta name="description" content="Get in touch with ChatIQ. Contact our sales and support team." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Set your Supabase credentials here.
+    // Get them from your Supabase project: Settings > API > Project API keys
+    // See .env.example for reference.
+    window.__CHATIQ_CONFIG__ = {
+      supabaseUrl: 'https://jlopvxrlsbwnhptwsplc.supabase.co',       // <-- Replace with your NEXT_PUBLIC_SUPABASE_URL
+      supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impsb3B2eHJsc2J3bmhwdHdzcGxjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5MzY0ODAsImV4cCI6MjA5NTUxMjQ4MH0.dJIUBPiM7amSlM4U98rmY353K5Vin_x-8GTNQ5MESNI'    // <-- Replace with your NEXT_PUBLIC_SUPABASE_ANON_KEY
+    };
+  </script>
+</head>
+<body>
+
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-icon"><i class="fab fa-whatsapp"></i></span> ChatIQ
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="whatsapp-setup.html">Integrations</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://github-com-whatsapp-crm-wacrm-ezpc.vercel.app/login" class="btn btn-secondary btn-sm">Log In</a>
+      <a href="https://github-com-whatsapp-crm-wacrm-ezpc.vercel.app/signup" class="btn btn-primary btn-sm">Start Free Trial</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="container text-center">
+    <span class="section-label">Contact</span>
+    <h1>Get in Touch</h1>
+    <p class="mx-auto">Have a question about ChatIQ? Want a demo? Our team is here to help.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-info-grid">
+      <div class="contact-info-card reveal">
+        <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+        <div>
+          <h3>Email Us</h3>
+          <p>hello@chatiq.in</p>
+          <p style="font-size:13px;margin-top:4px;">We reply within 24 hours</p>
+        </div>
+      </div>
+      <div class="contact-info-card reveal">
+        <div class="contact-info-icon"><i class="fab fa-whatsapp"></i></div>
+        <div>
+          <h3>WhatsApp Support</h3>
+          <p>+91 98765 43210</p>
+          <p style="font-size:13px;margin-top:4px;">Available during business hours</p>
+        </div>
+      </div>
+      <div class="contact-info-card reveal">
+        <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
+        <div>
+          <h3>Business Hours</h3>
+          <p>Monday to Friday: 9 AM – 6 PM IST</p>
+          <p style="font-size:13px;margin-top:4px;">Weekend support available on email</p>
+        </div>
+      </div>
+      <div class="contact-info-card reveal">
+        <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div>
+          <h3>Our Office</h3>
+          <p>Bengaluru, Karnataka, India</p>
+          <p style="font-size:13px;margin-top:4px;">Remote-first team</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="align-items:start;">
+      <div class="reveal">
+        <h2 style="font-size:24px;font-weight:700;margin-bottom:8px;">Send Us a Message</h2>
+        <p style="color:var(--text-secondary);margin-bottom:24px;">Fill out the form and we'll get back to you as soon as possible.</p>
+        <form id="contactForm">
+          <div class="form-group">
+            <label class="form-label" for="name">Full Name</label>
+            <input type="text" id="name" class="form-input" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input type="email" id="email" class="form-input" placeholder="you@company.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="subject">Subject</label>
+            <input type="text" id="subject" class="form-input" placeholder="How can we help?" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea id="message" class="form-input" rows="5" placeholder="Tell us more about your requirements..." style="resize:vertical;" required></textarea>
+          </div>
+          <div id="contactFormStatus" style="display:none;"></div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="contactSubmitBtn">
+            <span id="contactBtnText">Send Message <i class="fas fa-arrow-right"></i></span>
+            <span id="contactBtnLoader" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
+          </button>
+        </form>
+      </div>
+      <div class="reveal">
+        <div style="background:var(--bg-light);border:1px solid var(--border);border-radius:var(--radius-md);padding:40px;">
+          <a href="https://wa.me/919986396847" target="_blank" class="btn btn-outline-green btn-block" style="justify-content:center;margin-bottom:20px;">
+            <i class="fab fa-whatsapp"></i> Chat With Us on WhatsApp
+          </a>
+          <h3 style="font-size:18px;margin-bottom:16px;">Prefer to try ChatIQ first?</h3>
+          <p style="color:var(--text-secondary);margin-bottom:24px;">Start your 14-day free trial and explore all features. No credit card required.</p>
+          <a href="https://github-com-whatsapp-crm-wacrm-ezpc.vercel.app/signup" class="btn btn-primary">Start Free Trial <i class="fas fa-arrow-right"></i></a>
+          <hr style="border:none;border-top:1px solid var(--border);margin:32px 0;" />
+          <h3 style="font-size:18px;margin-bottom:16px;">Already a customer?</h3>
+          <p style="color:var(--text-secondary);margin-bottom:8px;">Check our documentation or log in to your account for help.</p>
+          <a href="https://github-com-whatsapp-crm-wacrm-ezpc.vercel.app/login" class="btn btn-secondary" style="margin-top:12px;">Log In to Your Account</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span class="nav-logo-icon"><i class="fab fa-whatsapp"></i></span> ChatIQ</a>
+        <p>The WhatsApp CRM and automation platform for modern businesses.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="whatsapp-setup.html">Integrations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="whatsapp-setup.html">Documentation</a></li>
+          <li><a href="contact.html">Support</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+          <li><a href="refund-policy.html">Refund Policy</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ChatIQ. All rights reserved.</p>
+      <p>Made with <i class="fas fa-heart" style="color:#25D366;"></i> in India</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/contact.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

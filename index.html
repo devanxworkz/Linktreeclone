@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatIQ — WhatsApp CRM & Automation Platform for Business Growth</title>
+  <meta name="description" content="ChatIQ is a premium WhatsApp CRM and automation platform. Manage conversations, automate workflows, run broadcast campaigns, and grow your business on WhatsApp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0e1a;
+      color: #e2e8f0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    :root {
+      --bg-primary: #0a0e1a;
+      --bg-secondary: #111827;
+      --bg-card: #1a1f2e;
+      --bg-card-hover: #1f2537;
+      --accent: #6366f1;
+      --accent-light: #818cf8;
+      --accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
+      --accent-gradient-2: linear-gradient(135deg, #6366f1, #06b6d4);
+      --secondary: #06b6d4;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: #1e293b;
+      --border-light: #2d3a4e;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.3);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
+      --shadow-xl: 0 20px 60px rgba(0,0,0,0.5);
+      --glass-bg: rgba(255,255,255,0.03);
+      --glass-border: rgba(255,255,255,0.06);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --max-width: 1200px;
+      --nav-height: 72px;
+    }
+    a { color: var(--accent-light); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #a5b4fc; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-label {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-light);
+      background: rgba(99,102,241,0.12);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+    .text-center { text-align: center; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(99,102,241,0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(99,102,241,0.45);
+      color: #fff;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1.5px solid var(--border-light);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(99,102,241,0.08);
+      transform: translateY(-2px);
+      color: var(--text-primary);
+    }
+    .btn-white {
+      background: #fff;
+      color: #0a0e1a;
+    }
+    .btn-white:hover {
+      background: #e2e8f0;
+      transform: translateY(-2px);
+      color: #0a0e1a;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      background: rgba(10,14,26,0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgba(10,14,26,0.95);
+      border-bottom-color: var(--border);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .nav-logo i { color: var(--accent); font-size: 26px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .nav-actions .btn { padding: 10px 20px; font-size: 13px; }
+    .nav-actions .btn-primary { padding: 10px 20px; }
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 24px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      padding: calc(var(--nav-height) + 60px) 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.2);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-light);
+      margin-bottom: 24px;
+    }
+    .hero-badge i { font-size: 12px; }
+    .hero-title {
+      font-size: clamp(36px, 5.5vw, 60px);
+      font-weight: 900;
+      line-height: 1.08;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .hero-title span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 540px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 48px; }
+    .hero-stats { display: flex; gap: 40px; }
+    .hero-stat h3 { font-size: 28px; font-weight: 800; color: var(--text-primary); }
+    .hero-stat p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+    .hero-visual { position: relative; }
+    .hero-dashboard {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      position: relative;
+    }
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+    .dash-dots { display: flex; gap: 6px; }
+    .dash-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dash-dot:nth-child(1) { background: #ef4444; }
+    .dash-dot:nth-child(2) { background: #f59e0b; }
+    .dash-dot:nth-child(3) { background: #10b981; }
+    .dash-tabs { display: flex; gap: 16px; }
+    .dash-tabs span { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+    .dash-tabs span.active { color: var(--accent-light); }
+    .dash-body { padding: 20px; }
+    .dash-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .dash-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px; color: #fff;
+      flex-shrink: 0;
+    }
+    .dash-info { flex: 1; min-width: 0; }
+    .dash-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .dash-msg { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dash-badge {
+      font-size: 11px;
+      padding: 2px 10px;
+      border-radius: 100px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .dash-badge.green { background: rgba(16,185,129,0.15); color: #34d399; }
+    .dash-badge.blue { background: rgba(99,102,241,0.15); color: #818cf8; }
+    .dash-badge.amber { background: rgba(245,158,11,0.15); color: #fbbf24; }
+
+    .hero-bg-glow {
+      position: absolute;
+      bottom: -40%;
+      left: -20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== TRUSTED ===== */
+    #trusted {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .trusted-label { text-align: center; font-size: 13px; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 32px; }
+    .trusted-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 48px; align-items: center; }
+    .trusted-item { text-align: center; }
+    .trusted-item .number { font-size: 32px; font-weight: 800; color: var(--text-primary); }
+    .trusted-item .label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+    /* ===== FEATURES ===== */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent-gradient);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-light);
+      background: var(--bg-card-hover);
+      box-shadow: var(--shadow-lg);
+    }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon {
+      width: 48px; height: 48px;
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      margin-bottom: 20px;
+      background: rgba(99,102,241,0.1);
+      color: var(--accent-light);
+    }
+    .feature-card h3 { font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+    .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ===== SHOWCASE ===== */
+    #showcase { background: var(--bg-secondary); }
+    .showcase-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding: 60px 0;
+    }
+    .showcase-item.reverse { direction: rtl; }
+    .showcase-item.reverse > * { direction: ltr; }
+    .showcase-content h3 { font-size: 24px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; }
+    .showcase-content p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; }
+    .showcase-mockup {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+    }
+    .showcase-mockup .mockup-bar {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+    }
+    .mockup-bar i { color: var(--accent); font-size: 18px; }
+    .mockup-bar span { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+    .mockup-chart {
+      display: flex; align-items: flex-end; gap: 8px; height: 120px; padding-top: 10px;
+    }
+    .mockup-chart .bar {
+      flex: 1; border-radius: 4px 4px 0 0;
+      background: var(--accent-gradient);
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+    .mockup-chart .bar:nth-child(odd) { opacity: 0.8; }
+    .mockup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .mockup-grid-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px;
+    }
+    .mockup-grid-item .label { font-size: 11px; color: var(--text-muted); }
+    .mockup-grid-item .value { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-top: 4px; }
+
+    /* ===== HOW IT WORKS ===== */
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: calc(12.5% + 24px);
+      right: calc(12.5% + 24px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--secondary), transparent);
+      z-index: 0;
+    }
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      transition: all 0.4s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-light);
+    }
+    .step-number {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800; color: #fff;
+      margin: 0 auto 16px;
+    }
+    .step-card h3 { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .step-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ===== BENEFITS ===== */
+    .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .benefit-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      transition: all 0.4s ease;
+      text-align: center;
+    }
+    .benefit-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-light);
+      box-shadow: var(--shadow-md);
+    }
+    .benefit-card i {
+      font-size: 28px;
+      width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      border-radius: var(--radius-sm);
+    }
+    .benefit-card h3 { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .benefit-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ===== COMPARISON ===== */
+    #comparison { background: var(--bg-secondary); }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .compare-table th, .compare-table td {
+      padding: 16px 24px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .compare-table th {
+      font-weight: 700;
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+      font-size: 15px;
+    }
+    .compare-table th:first-child { border-radius: 0; }
+    .compare-table td:first-child { font-weight: 600; color: var(--text-primary); }
+    .compare-table td i { font-size: 18px; }
+    .compare-table .fa-check { color: var(--success); }
+    .compare-table .fa-times { color: #ef4444; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ===== PRICING ===== */
+    .pricing-toggle {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      margin-bottom: 48px;
+    }
+    .pricing-toggle span { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+    .pricing-toggle span.active { color: var(--text-primary); }
+    .toggle-switch {
+      width: 48px; height: 26px;
+      background: var(--border-light);
+      border-radius: 100px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .toggle-switch.active { background: var(--accent); }
+    .toggle-switch .knob {
+      width: 20px; height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 3px; left: 3px;
+      transition: transform 0.3s ease;
+    }
+    .toggle-switch.active .knob { transform: translateX(22px); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--border-light);
+    }
+    .pricing-card.popular {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(99,102,241,0.06), rgba(139,92,246,0.06));
+      transform: translateY(-8px);
+    }
+    .pricing-card.popular:hover { transform: translateY(-12px); }
+    .pricing-popular-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-gradient);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 20px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .pricing-card .plan-name { font-size: 14px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+    .pricing-card .price { font-size: 44px; font-weight: 800; color: var(--text-primary); }
+    .pricing-card .price span { font-size: 16px; color: var(--text-muted); font-weight: 500; }
+    .pricing-card .price-desc { font-size: 13px; color: var(--text-muted); margin-top: 8px; margin-bottom: 24px; }
+    .pricing-card .btn { width: 100%; justify-content: center; }
+    .pricing-features { list-style: none; margin-top: 28px; }
+    .pricing-features li {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .pricing-features li:last-child { border-bottom: none; }
+    .pricing-features li i { color: var(--success); font-size: 14px; width: 18px; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      transition: all 0.4s ease;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-light);
+      box-shadow: var(--shadow-md);
+    }
+    .testimonial-stars { color: #f59e0b; font-size: 14px; margin-bottom: 16px; }
+    .testimonial-text { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 15px; color: #fff;
+      flex-shrink: 0;
+    }
+    .testimonial-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .testimonial-company { font-size: 12px; color: var(--text-muted); }
+
+    /* ===== FAQ ===== */
+    .faq-list { max-width: 768px; margin: 0 auto; }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .faq-item.active { border-color: var(--accent); }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 24px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      user-select: none;
+      transition: color 0.3s;
+    }
+    .faq-item.active .faq-question { color: var(--accent-light); }
+    .faq-question i {
+      font-size: 14px;
+      transition: transform 0.3s ease;
+      color: var(--text-muted);
+    }
+    .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--accent-light); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 24px;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      padding: 0 24px 20px;
+    }
+    .faq-answer p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ===== CTA ===== */
+    #cta {
+      background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(6,182,212,0.08));
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .cta-title { font-size: clamp(32px, 4vw, 44px); font-weight: 800; color: var(--text-primary); margin-bottom: 16px; }
+    .cta-subtitle { font-size: 17px; color: var(--text-secondary); max-width: 560px; margin: 0 auto 36px; }
+    .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 64px 0 32px;
+      background: var(--bg-secondary);
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; max-width: 300px; }
+    .footer-col h4 { font-size: 13px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 12px; }
+    .footer-col ul a { font-size: 14px; color: var(--text-secondary); }
+    .footer-col ul a:hover { color: var(--text-primary); }
+    .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+    .footer-social a {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted);
+      font-size: 15px;
+      transition: all 0.3s;
+    }
+    .footer-social a:hover {
+      border-color: var(--accent);
+      color: var(--accent-light);
+      background: rgba(99,102,241,0.1);
+      transform: translateY(-2px);
+    }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: var(--text-muted); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .grid-3, .benefits-grid, .features-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-card.popular { order: -1; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-actions .btn-secondary { display: none; }
+      .mobile-toggle { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: var(--nav-height); left: 0; right: 0;
+        background: rgba(10,14,26,0.98);
+        backdrop-filter: blur(20px);
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border);
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .hero-stats { justify-content: center; }
+      .hero-actions { justify-content: center; }
+      .hero-subtitle { text-align: center; margin-left: auto; margin-right: auto; }
+      .hero-title { text-align: center; }
+      .hero-badge { margin-left: auto; margin-right: auto; }
+
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-3, .benefits-grid, .features-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid::before { display: none; }
+      .showcase-item { grid-template-columns: 1fr; }
+      .showcase-item.reverse { direction: ltr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .compare-table { font-size: 13px; }
+      .compare-table th, .compare-table td { padding: 12px 16px; }
+      .section { padding: 60px 0; }
+      #hero { padding: calc(var(--nav-height) + 40px) 0 60px; }
+      .hero-stats { gap: 24px; }
+      .trusted-grid { gap: 32px; }
+    }
+    @media (max-width: 480px) {
+      .steps-grid { grid-template-columns: 1fr; }
+      .pricing-card { padding: 28px 20px; }
+      .hero-stats { flex-direction: column; align-items: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <i class="fas fa-comment-dots"></i> ChatIQ
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn btn-secondary">Log In</a>
+      <a href="#" class="btn btn-primary">Start Free Trial</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">
+          <i class="fas fa-sparkles"></i> #1 WhatsApp CRM Platform
+        </div>
+        <h1 class="hero-title">Manage, Automate and <span>Grow</span> Your Business on WhatsApp</h1>
+        <p class="hero-subtitle">
+          Transform your WhatsApp from a simple chat app into a powerful business engine. Shared inbox, campaigns, automation, CRM, and analytics — all in one platform.
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary">
+            Start Free Trial <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="#" class="btn btn-secondary">
+            <i class="fas fa-play-circle"></i> Book Demo
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><h3>1,000+</h3><p>Businesses Onboarded</p></div>
+          <div class="hero-stat"><h3>500K+</h3><p>Messages Managed</p></div>
+          <div class="hero-stat"><h3>99.9%</h3><p>Uptime Guarantee</p></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-dashboard">
+          <div class="dash-header">
+            <div class="dash-dots">
+              <span class="dash-dot"></span>
+              <span class="dash-dot"></span>
+              <span class="dash-dot"></span>
+            </div>
+            <div class="dash-tabs">
+              <span class="active">Inbox</span>
+              <span>Campaigns</span>
+              <span>Analytics</span>
+            </div>
+            <i class="fas fa-ellipsis-v" style="color: var(--text-muted); font-size: 14px;"></i>
+          </div>
+          <div class="dash-body">
+            <div class="dash-row">
+              <div class="dash-avatar" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">PK</div>
+              <div class="dash-info">
+                <div class="dash-name">Priya Kapoor</div>
+                <div class="dash-msg">Hi, I wanted to check on my order #ORD-4821</div>
+              </div>
+              <span class="dash-badge green">New</span>
+            </div>
+            <div class="dash-row">
+              <div class="dash-avatar" style="background: linear-gradient(135deg, #06b6d4, #10b981);">AM</div>
+              <div class="dash-info">
+                <div class="dash-name">Aarav Mehta</div>
+                <div class="dash-msg">Can you share the pricing for the premium plan?</div>
+              </div>
+              <span class="dash-badge blue">Follow-up</span>
+            </div>
+            <div class="dash-row">
+              <div class="dash-avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">SJ</div>
+              <div class="dash-info">
+                <div class="dash-name">Sneha Joshi</div>
+                <div class="dash-msg">The demo went great! We'd like to proceed.</div>
+              </div>
+              <span class="dash-badge green">Won</span>
+            </div>
+            <div class="dash-row">
+              <div class="dash-avatar" style="background: linear-gradient(135deg, #a78bfa, #6366f1);">RS</div>
+              <div class="dash-info">
+                <div class="dash-name">Rahul Sharma</div>
+                <div class="dash-msg">Support request: Payment failed on invoice #INV-903</div>
+              </div>
+              <span class="dash-badge amber">Urgent</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-bg-glow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUSTED BY ===== -->
+<section id="trusted">
+  <div class="container">
+    <div class="trusted-label">Trusted by businesses across India</div>
+    <div class="trusted-grid">
+      <div class="trusted-item"><div class="number"><i class="fas fa-building" style="color: var(--accent); margin-right: 8px;"></i>1,000+</div><div class="label">Active Businesses</div></div>
+      <div class="trusted-item"><div class="number"><i class="fas fa-comments" style="color: var(--secondary); margin-right: 8px;"></i>500K+</div><div class="label">Messages Managed</div></div>
+      <div class="trusted-item"><div class="number"><i class="fas fa-shield-alt" style="color: var(--success); margin-right: 8px;"></i>99.9%</div><div class="label">Uptime Guarantee</div></div>
+      <div class="trusted-item"><div class="number"><i class="fas fa-star" style="color: #f59e0b; margin-right: 8px;"></i>4.9/5</div><div class="label">Average Rating</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section id="features" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Features</span>
+      <h2 class="section-title">Everything You Need to Run WhatsApp Like a CRM</h2>
+      <p class="section-subtitle mx-auto" style="margin-bottom: 48px;">
+        From shared inbox to AI-powered responses, ChatIQ gives you every tool to manage customer conversations at scale.
+      </p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-inbox"></i></div>
+        <h3>Shared Team Inbox</h3>
+        <p>Multiple team members can view, assign, and reply to WhatsApp messages from a single shared inbox. Never miss a customer message again.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-bullhorn"></i></div>
+        <h3>WhatsApp Broadcast Campaigns</h3>
+        <p>Send personalized bulk messages to thousands of customers with a single click. Segment your audience for targeted campaigns with rich media support.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-address-book"></i></div>
+        <h3>Contact Management</h3>
+        <p>Import, organize, and tag your contacts with custom fields. Keep detailed profiles with conversation history, purchase data, and notes.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+        <h3>Workflow Automation</h3>
+        <p>Build powerful automations with triggers, conditions, and actions. Auto-reply, assign conversations, update contact properties, and send follow-ups.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-users"></i></div>
+        <h3>Customer Segmentation</h3>
+        <p>Segment your audience by behavior, purchase history, location, and custom attributes. Target the right customers with the right message every time.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-user-friends"></i></div>
+        <h3>Team Collaboration</h3>
+        <p>Assign conversations, leave internal notes, and track team performance. Keep your support and sales teams aligned with real-time collaboration tools.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+        <h3>Analytics Dashboard</h3>
+        <p>Track response times, conversation volumes, campaign performance, and team productivity with beautiful real-time dashboards and exportable reports.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-robot"></i></div>
+        <h3>AI-Powered Responses</h3>
+        <p>Leverage AI to suggest replies, auto-categorize messages, detect sentiment, and generate intelligent responses that save your team hours every day.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+        <h3>Message Templates</h3>
+        <p>Create and save reusable message templates for greetings, order updates, payment reminders, and support responses. Pre-approved by WhatsApp.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-tasks"></i></div>
+        <h3>Lead Management</h3>
+        <p>Track leads from first message to closed deal. Set pipeline stages, move deals forward, and never let a hot lead go cold with automated follow-up reminders.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCT SHOWCASE ===== -->
+<section id="showcase" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Product Showcase</span>
+      <h2 class="section-title">See ChatIQ in Action</h2>
+      <p class="section-subtitle mx-auto" style="margin-bottom: 48px;">
+        Powerful tools designed for real businesses. Every screen is built for speed, clarity, and collaboration.
+      </p>
+    </div>
+
+    <div class="showcase-item reveal">
+      <div class="showcase-content">
+        <h3>Unified Team Inbox</h3>
+        <p>Every customer conversation lands in one place. Assign messages to team members, add internal notes, and track response times. Your team stays in sync without ever leaving WhatsApp.</p>
+      </div>
+      <div class="showcase-mockup">
+        <div class="mockup-bar"><i class="fas fa-inbox"></i><span>Inbox — 23 Unread</span></div>
+        <div class="dash-row"><div class="dash-avatar" style="background:#6366f1;">NK</div><div class="dash-info"><div class="dash-name">Neha Khanna</div><div class="dash-msg">My order hasn't arrived yet. Can you check?</div></div><span class="dash-badge green">Assigned</span></div>
+        <div class="dash-row"><div class="dash-avatar" style="background:#06b6d4;">VP</div><div class="dash-info"><div class="dash-name">Vikram Patel</div><div class="dash-msg">Need a quote for 50 units. Please share.</div></div><span class="dash-badge blue">Sales</span></div>
+        <div class="dash-row"><div class="dash-avatar" style="background:#10b981;">AS</div><div class="dash-info"><div class="dash-name">Ananya Singh</div><div class="dash-msg">Thanks for the quick support! 5 stars.</div></div><span class="dash-badge green">Resolved</span></div>
+      </div>
+    </div>
+
+    <div class="showcase-item reverse reveal">
+      <div class="showcase-content">
+        <h3>Smart Contact Management</h3>
+        <p>Know every customer by more than their name. Store purchase history, custom fields, tags, and interaction history. Search across thousands of contacts instantly and build precise segments for targeted campaigns.</p>
+      </div>
+      <div class="showcase-mockup">
+        <div class="mockup-bar"><i class="fas fa-address-book"></i><span>Contacts — 1,247 Total</span></div>
+        <div class="mockup-grid">
+          <div class="mockup-grid-item"><div class="label">With Orders</div><div class="value">842</div></div>
+          <div class="mockup-grid-item"><div class="label">New This Month</div><div class="value">163</div></div>
+          <div class="mockup-grid-item"><div class="label">Avg. LTV</div><div class="value">₹4,280</div></div>
+          <div class="mockup-grid-item"><div class="label">Active Chats</div><div class="value">38</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="showcase-item reveal">
+      <div class="showcase-content">
+        <h3>Analytics That Drive Decisions</h3>
+        <p>Understand your customer conversations at a glance. Track response times, team performance, campaign ROI, and customer satisfaction scores. Every metric is updated in real-time and ready to export.</p>
+      </div>
+      <div class="showcase-mockup">
+        <div class="mockup-bar"><i class="fas fa-chart-bar"></i><span>Analytics — Last 30 Days</span></div>
+        <div class="mockup-chart">
+          <div class="bar" style="height:60%;"></div>
+          <div class="bar" style="height:40%;"></div>
+          <div class="bar" style="height:80%;"></div>
+          <div class="bar" style="height:55%;"></div>
+          <div class="bar" style="height:90%;"></div>
+          <div class="bar" style="height:70%;"></div>
+          <div class="bar" style="height:45%;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 12px; font-size: 11px; color: var(--text-muted);">
+          <span>Conversations</span>
+          <span>+32% vs last month</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section id="how-it-works" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">How It Works</span>
+      <h2 class="section-title">Get Started in 4 Simple Steps</h2>
+      <p class="section-subtitle mx-auto" style="margin-bottom: 48px;">
+        From zero to managing customers on WhatsApp in under 10 minutes. No technical skills required.
+      </p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-number">1</div>
+        <h3>Create Your Account</h3>
+        <p>Sign up for free with your email address. No credit card required. Start your 14-day trial and explore all features immediately.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-number">2</div>
+        <h3>Connect WhatsApp Business</h3>
+        <p>Link your WhatsApp Business number with our simple one-click verification process. Your existing chats and contacts sync automatically.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-number">3</div>
+        <h3>Import Your Contacts</h3>
+        <p>Upload contacts via CSV, connect your existing CRM, or let us import them automatically from your WhatsApp conversations.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-number">4</div>
+        <h3>Start Managing Customers</h3>
+        <p>Begin responding to messages, set up automations, create campaigns, and watch your customer satisfaction and sales grow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BENEFITS ===== -->
+<section id="benefits" class="section" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Benefits</span>
+      <h2 class="section-title">Why Businesses Choose ChatIQ</h2>
+      <p class="section-subtitle mx-auto" style="margin-bottom: 48px;">
+        Real results for real businesses. Here's what happens when you bring your WhatsApp customer communication to ChatIQ.
+      </p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <i class="fas fa-bolt" style="background: rgba(99,102,241,0.12); color: var(--accent-light);"></i>
+        <h3>Faster Customer Response</h3>
+        <p>Respond to customer inquiries 3x faster with shared inbox, auto-assignment, and AI-suggested replies. Reduce first response time from hours to minutes.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <i class="fas fa-trending-up" style="background: rgba(16,185,129,0.12); color: var(--success);"></i>
+        <h3>Increased Sales</h3>
+        <p>Convert more leads with timely follow-ups, automated lead nurturing, and campaign targeting. Businesses see an average 34% increase in conversion rates.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <i class="fas fa-heart" style="background: rgba(239,68,68,0.12); color: #f87171;"></i>
+        <h3>Better Customer Retention</h3>
+        <p>Stay connected with automated birthday wishes, order updates, and re-engagement campaigns. Improve customer retention by up to 28% within the first quarter.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <i class="fas fa-users-gear" style="background: rgba(6,182,212,0.12); color: var(--secondary);"></i>
+        <h3>Team Productivity</h3>
+        <p>Empower your entire team to handle WhatsApp conversations from one place. Reduce context switching and eliminate missed messages with clear ownership and collaboration tools.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <i class="fas fa-clock" style="background: rgba(245,158,11,0.12); color: var(--warning);"></i>
+        <h3>Automated Support</h3>
+        <p>Handle 60% of common queries with smart chatbots and automated workflows. Your team focuses on complex issues while ChatIQ handles the rest, 24/7.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <i class="fas fa-diagram-project" style="background: rgba(139,92,246,0.12); color: #a78bfa;"></i>
+        <h3>Centralized Communication</h3>
+        <p>All customer conversations, contact data, campaign history, and analytics in one powerful dashboard. No more switching between spreadsheets and personal WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON ===== -->
+<section id="comparison" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Comparison</span>
+      <h2 class="section-title">Built for Business, Not Personal Chat</h2>
+      <p class="section-subtitle mx-auto" style="margin-bottom: 48px;">
+        See why thousands of businesses are switching from personal WhatsApp to ChatIQ.
+      </p>
+    </div>
+    <div class="reveal" style="overflow-x: auto;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th><i class="fas fa-mobile-alt" style="margin-right: 6px;"></i> Personal WhatsApp</th>
+            <th><i class="fas fa-comment-dots" style="color: var(--accent); margin-right: 6px;"></i> ChatIQ Platform</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Shared Team Inbox</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td>Automation & Workflows</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td>Analytics & Reports</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td>Broadcast Campaigns</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td>CRM & Contact Management</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td>AI-Powered Responses</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td>Team Collaboration</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td>Message Templates</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td>Customer Segmentation</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+          <tr><td>API Access & Integrations</td><td><i class="fas fa-times"></i></td><td><i class="fas fa-check"></i></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section id="pricing" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-title">Simple, Transparent Pricing</h2>
+      <p class="section-subtitle mx-auto" style="margin-bottom: 32px;">
+        Choose the plan that fits your business. All plans include a 14-day free trial. No hidden fees.
+      </p>
+    </div>
+    <div class="pricing-toggle reveal">
+      <span class="active" id="monthlyLabel">Monthly</span>
+      <div class="toggle-switch" id="pricingToggle">
+        <div class="knob"></div>
+      </div>
+      <span id="yearlyLabel">Yearly <span style="color: var(--success); font-weight: 600;">Save 20%</span></span>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="plan-name">Starter</div>
+        <div class="price" id="starterPrice">₹999<span>/month</span></div>
+        <div class="price-desc">Perfect for freelancers and small teams just getting started with WhatsApp business messaging.</div>
+        <a href="#" class="btn btn-secondary">Start Free Trial</a>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> 2 Team Members</li>
+          <li><i class="fas fa-check"></i> Shared Inbox</li>
+          <li><i class="fas fa-check"></i> 1,000 Contacts</li>
+          <li><i class="fas fa-check"></i> 5,000 Messages/Month</li>
+          <li><i class="fas fa-check"></i> Basic Analytics</li>
+          <li><i class="fas fa-check"></i> Message Templates</li>
+          <li><i class="fas fa-check"></i> Email Support</li>
+        </ul>
+      </div>
+      <div class="pricing-card popular reveal">
+        <div class="pricing-popular-badge">Most Popular</div>
+        <div class="plan-name">Growth</div>
+        <div class="price" id="growthPrice">₹2,999<span>/month</span></div>
+        <div class="price-desc">For growing teams that need automation, campaigns, and deeper customer insights.</div>
+        <a href="#" class="btn btn-primary">Start Free Trial</a>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> 10 Team Members</li>
+          <li><i class="fas fa-check"></i> Shared Inbox + Auto-Assign</li>
+          <li><i class="fas fa-check"></i> 10,000 Contacts</li>
+          <li><i class="fas fa-check"></i> 25,000 Messages/Month</li>
+          <li><i class="fas fa-check"></i> Advanced Analytics</li>
+          <li><i class="fas fa-check"></i> Broadcast Campaigns</li>
+          <li><i class="fas fa-check"></i> Workflow Automation</li>
+          <li><i class="fas fa-check"></i> Customer Segmentation</li>
+          <li><i class="fas fa-check"></i> Chat Support</li>
+        </ul>
+      </div>
+      <div class="pricing-card reveal">
+        <div class="plan-name">Pro</div>
+        <div class="price" id="proPrice">₹6,999<span>/month</span></div>
+        <div class="price-desc">For established businesses that need full power, AI features, and priority support.</div>
+        <a href="#" class="btn btn-secondary">Start Free Trial</a>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> Unlimited Team Members</li>
+          <li><i class="fas fa-check"></i> Everything in Growth</li>
+          <li><i class="fas fa-check"></i> Unlimited Contacts</li>
+          <li><i class="fas fa-check"></i> 100,000 Messages/Month</li>
+          <li><i class="fas fa-check"></i> AI-Powered Responses</li>
+          <li><i class="fas fa-check"></i> Custom Integrations</li>
+          <li><i class="fas fa-check"></i> API Access</li>
+          <li><i class="fas fa-check"></i> Priority Support</li>
+          <li><i class="fas fa-check"></i> Dedicated Account Manager</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials" class="section" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">Testimonials</span>
+      <h2 class="section-title">Loved by Business Owners Across India</h2>
+      <p class="section-subtitle mx-auto" style="margin-bottom: 48px;">
+        Here's what our customers say about transforming their WhatsApp customer experience with ChatIQ.
+      </p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testimonial-text">"ChatIQ transformed how we handle customer support. Our response time dropped from 4 hours to under 5 minutes. The shared inbox alone was worth the switch."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">RK</div>
+          <div><div class="testimonial-name">Rajesh Khanna</div><div class="testimonial-company">Founder, ShopDirect India</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testimonial-text">"The broadcast campaigns are a game-changer. We sent a Diwali offer to 8,000 customers and saw ₹12 lakh in revenue within 48 hours. Unbelievable ROI."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: linear-gradient(135deg, #06b6d4, #10b981);">PM</div>
+          <div><div class="testimonial-name">Priya Mehra</div><div class="testimonial-company">CEO, UrbanCraft Store</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testimonial-text">"We were managing 5,000+ WhatsApp messages a month on personal phones. ChatIQ gave us a proper system. My team of 12 now handles everything from one dashboard."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">AS</div>
+          <div><div class="testimonial-name">Arun Sharma</div><div class="testimonial-company">Director, FirstChoice Realty</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testimonial-text">"The automation workflows saved us from hiring two extra support staff. Our order update messages, payment reminders, and FAQs are all handled automatically now."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: linear-gradient(135deg, #a78bfa, #6366f1);">NJ</div>
+          <div><div class="testimonial-name">Neha Joshi</div><div class="testimonial-company">COO, FreshBites Delivery</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testimonial-text">"I love the analytics. For the first time, I can actually see how many conversations my team is handling, average response times, and customer satisfaction trends."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: linear-gradient(135deg, #10b981, #06b6d4);">VM</div>
+          <div><div class="testimonial-name">Vikas Malhotra</div><div class="testimonial-company">Founder, EduPrime Learning</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="testimonial-text">"Setting up was incredibly easy. We connected our WhatsApp Business number in under 2 minutes and imported 3,000 contacts from a CSV. The 14-day trial sold itself."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: linear-gradient(135deg, #ef4444, #f59e0b);">SK</div>
+          <div><div class="testimonial-name">Sneha Kapoor</div><div class="testimonial-company">Marketing Head, LuxeLiving Interiors</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-subtitle mx-auto" style="margin-bottom: 48px;">
+        Everything you need to know about ChatIQ. Can't find what you're looking for? Reach out to our support team.
+      </p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item active reveal">
+        <div class="faq-question">How does ChatIQ integrate with WhatsApp? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>ChatIQ connects directly with the official WhatsApp Business API. You can use your existing WhatsApp Business number or apply for a new one through our platform. The integration takes less than 5 minutes and all your existing chats sync automatically.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">Is there a free trial? Do I need a credit card? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>Yes, we offer a 14-day free trial on all plans with full feature access. No credit card is required to start your trial. You can upgrade, downgrade, or cancel anytime during the trial period with zero obligations.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">How is my data secured on ChatIQ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>We take security seriously. All data is encrypted in transit (TLS 1.3) and at rest (AES-256). We are GDPR compliant, host on AWS India servers, and conduct regular third-party security audits. Your customer conversations and contact data are never shared with third parties.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">Can my entire team use ChatIQ simultaneously? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>Absolutely. Each plan comes with a specific number of team member seats. All team members can access the shared inbox simultaneously, respond to conversations, and collaborate in real-time. You can assign different roles and permissions to each team member.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">How long does it take to set up? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>Most businesses are fully set up within 10-15 minutes. Create your account, connect your WhatsApp Business number, import your contacts, and you're ready to go. We provide step-by-step onboarding guides and dedicated support for setup assistance.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">What kind of support do you offer? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>All plans include email support with a 4-hour response time. Growth plan includes live chat support. Pro plan includes priority support with 1-hour response time and a dedicated account manager. Enterprise customers get 24/7 phone support and a custom SLA.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">Can I send broadcast messages to my customers? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>Yes. Growth and Pro plans include WhatsApp Broadcast Campaigns. You can send personalized bulk messages to segmented customer lists with images, documents, and links. All broadcasts comply with WhatsApp's template messaging policies to ensure high deliverability.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">Can I cancel my subscription anytime? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>Yes, you can cancel your subscription at any time. There are no long-term contracts or early termination fees. If you cancel, you'll retain access to your account until the end of your current billing period. Your data is available for export for 30 days after cancellation.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">Does ChatIQ work with international WhatsApp numbers? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>Yes, ChatIQ works with WhatsApp Business numbers worldwide. The platform supports all country codes and languages. Our messaging infrastructure is globally distributed to ensure low latency for your customers regardless of their location.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">Can I integrate ChatIQ with my existing CRM or tools? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>Yes. Pro plan includes API access and custom integrations. We offer native integrations with popular CRMs like HubSpot, Zoho, and Salesforce. We also support webhooks and Zapier integration to connect with 3,000+ apps. Our team can help build custom integrations for enterprise customers.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section id="cta" class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="cta-title">Start Managing Your WhatsApp Customers Smarter</h2>
+      <p class="cta-subtitle">Join 1,000+ Indian businesses that trust ChatIQ to manage, automate, and grow their customer conversations on WhatsApp. Start your free trial today.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-primary btn-lg" style="padding: 16px 36px; font-size: 16px;">
+          Start Free Trial <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#" class="btn btn-secondary btn-lg" style="padding: 16px 36px; font-size: 16px;">
+          <i class="fas fa-play-circle"></i> Book a Demo
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo"><i class="fas fa-comment-dots"></i> ChatIQ</a>
+        <p>The all-in-one WhatsApp CRM and automation platform for modern Indian businesses. Manage conversations, automate workflows, run campaigns, and grow your revenue — all from one dashboard.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">API</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ChatIQ. All rights reserved.</p>
+      <p>Made with <i class="fas fa-heart" style="color: #ef4444;"></i> in India</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav
+  const navbar = document.getElementById('navbar');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const current = window.pageYOffset;
+    if (current > 50) { navbar.classList.add('scrolled'); }
+    else { navbar.classList.remove('scrolled'); }
+    lastScroll = current;
+  });
+
+  // Mobile nav
+  document.getElementById('mobileToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // Pricing toggle
+  const toggle = document.getElementById('pricingToggle');
+  const monthlyLabel = document.getElementById('monthlyLabel');
+  const yearlyLabel = document.getElementById('yearlyLabel');
+  const starterPrice = document.getElementById('starterPrice');
+  const growthPrice = document.getElementById('growthPrice');
+  const proPrice = document.getElementById('proPrice');
+
+  const monthlyPrices = { starter: '₹999', growth: '₹2,999', pro: '₹6,999' };
+  const yearlyPrices = { starter: '₹9,999', growth: '₹29,999', pro: '₹69,999' };
+
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    const isYearly = toggle.classList.contains('active');
+    monthlyLabel.classList.toggle('active', !isYearly);
+    yearlyLabel.classList.toggle('active', isYearly);
+    const p = isYearly ? yearlyPrices : monthlyPrices;
+    starterPrice.innerHTML = `${p.starter}<span>/year</span>`;
+    growthPrice.innerHTML = `${p.growth}<span>/year</span>`;
+    proPrice.innerHTML = `${p.pro}<span>/year</span>`;
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      if (!isActive) item.classList.add('active');
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

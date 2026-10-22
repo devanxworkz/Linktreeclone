@@ -1,0 +1,30 @@
+{
+  "name": "pehchaan",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pehchaan — a multi-tenant link-in-bio SaaS for Indian creators (original build inspired by Beacons' core loop).",
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,magenta \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "npm --workspace server run dev",
+    "dev:web": "npm --workspace web run dev",
+    "build": "npm --workspace web run build && npm --workspace server run build",
+    "start": "npm --workspace server run start",
+    "migrate": "npm --workspace server run migrate",
+    "seed": "npm --workspace server run seed",
+    "typecheck": "npm --workspace server run typecheck && npm --workspace web run typecheck",
+    "test": "npm --workspace server run test",
+    "pretest:e2e": "npm run build",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.2",
+    "concurrently": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

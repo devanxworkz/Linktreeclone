@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account — ChatIQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-icon"><i class="fab fa-whatsapp"></i></span> ChatIQ
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="whatsapp-setup.html">Integrations</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://github-com-whatsapp-crm-wacrm-ezpc.vercel.app/login" class="btn btn-secondary btn-sm">Log In</a>
+      <a href="https://github-com-whatsapp-crm-wacrm-ezpc.vercel.app/signup" class="btn btn-primary btn-sm">Start Free Trial</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+  <div class="auth-page">
+    <div class="auth-card">
+      <a href="index.html" class="nav-logo">
+        <span class="nav-logo-icon"><i class="fab fa-whatsapp"></i></span> ChatIQ
+      </a>
+      <h1>Create your account</h1>
+      <p class="auth-subtitle">Start your 14-day free trial. No credit card needed.</p>
+      <form>
+        <div class="form-group">
+          <label class="form-label" for="fullName">Full Name</label>
+          <input type="text" id="fullName" class="form-input" placeholder="John Doe" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="companyName">Company Name</label>
+          <input type="text" id="companyName" class="form-input" placeholder="Your Business Name" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <input type="email" id="email" class="form-input" placeholder="you@company.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">Phone Number</label>
+          <input type="tel" id="phone" class="form-input" placeholder="+91 98765 43210" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input type="password" id="password" class="form-input" placeholder="Create a strong password" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your password" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Create Account</button>
+      </form>
+      <div class="auth-divider">or continue with</div>
+      <button class="btn btn-secondary btn-block" style="justify-content:center;">
+        <i class="fab fa-google"></i> Continue with Google
+      </button>
+      <div class="auth-footer">
+        Already have an account? <a href="https://github-com-whatsapp-crm-wacrm-ezpc.vercel.app/login">Log in</a>
+      </div>
+    </div>
+  </div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span class="nav-logo-icon"><i class="fab fa-whatsapp"></i></span> ChatIQ</a>
+        <p>The WhatsApp CRM and automation platform for modern businesses.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="whatsapp-setup.html">Integrations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="whatsapp-setup.html">Documentation</a></li>
+          <li><a href="contact.html">Support</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+          <li><a href="refund-policy.html">Refund Policy</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ChatIQ. All rights reserved.</p>
+      <p>Made with <i class="fas fa-heart" style="color:#25D366;"></i> in India</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

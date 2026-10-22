@@ -1,0 +1,45 @@
+feature,area,priority,original,clone,notes
+Sign up with email and password,auth,must,yes,yes,
+Log in and log out with a session,auth,must,yes,yes,
+Protected dashboard routes,auth,must,yes,yes,
+Creator account linked to a tenant/workspace,tenancy,must,yes,yes,
+Strict ownership check on every private read and write,tenancy,must,yes,yes,data-layer scoping + tests + RLS
+Unique validated creator username,tenancy,must,yes,yes,unique index on lower(username)
+Edit profile (name bio avatar),profile,must,yes,yes,avatar is a URL in this build
+Username and public URL (/u/username),profile,must,yes,yes,
+Add edit delete and reorder links,links,must,yes,yes,
+Toggle a link active/inactive,links,must,yes,yes,
+Add edit delete products with image price and URL,products,must,yes,yes,
+Select theme colour and layout,appearance,must,yes,yes,
+Preview page before publishing,publishing,must,yes,yes,
+Publish and unpublish the page,publishing,must,yes,yes,
+Copy the public page URL,publishing,must,yes,yes,
+Public page shows profile links and products,public page,must,yes,yes,
+WhatsApp contact button,india,must,yes,yes,wa.me deep link
+UPI link and optional QR image,india,must,yes,yes,shown as a link only - never as a verified payment
+INR currency formatting,india,must,yes,yes,Intl en-IN from paise
+Responsive mobile-first public page,public page,must,yes,yes,
+Basic share metadata (title description),public page,must,yes,yes,meta title/description stored and applied on /u/
+Admin role separate from creators,admin,must,yes,yes,
+Admin user and tenant overview,admin,must,yes,yes,
+Admin can suspend an account,admin,must,yes,yes,suspend also kills their sessions
+Basic platform usage statistics,admin,must,yes,yes,views and clicks aggregated
+Server-side schema validation,security,must,yes,yes,Zod at the API edge
+Clear errors for 401 403 and 404,security,must,yes,yes,cross-tenant ids return 404 not 403
+Social links row (instagram youtube x etc),public page,should,yes,yes,per-link icon set includes socials
+Icon per link block,links,should,yes,yes,
+Link click counts,analytics,should,yes,yes,recorded via public click endpoint
+Page view counts,analytics,should,yes,yes,recorded on public page load
+Empty loading success and error states,ux,should,yes,yes,
+Accessible keyboard navigation and labels,a11y,should,yes,partial,labelled controls and dialog focus trap; no automated axe audit yet
+Hindi and Kannada translations,india,should,no,partial,architecture ready - English complete some hi/kn strings
+Custom domain per creator,custom domains,could,yes,no,phase 2 - needs DNS and TLS
+Email newsletter to subscribers,email,could,yes,no,phase 2 - needs a mail provider
+Paid plans and billing,payments,could,yes,partial,pricing UI present no payment gateway connected
+Media kit and brand-deal tools,brand deals,could,yes,skip,depends on social APIs and a partner network
+AI content assistant,ai,could,yes,skip,proprietary model and data moat
+Native iOS and Android apps,mobile,could,yes,skip,out of phase-1 scope
+Beam AI teammate,ai,skip,yes,skip,not rebuildable without their model and data
+Brand deal marketplace and W-9 forms,brand deals,skip,yes,skip,partner regulated and region specific
+Google Workspace integration,integrations,skip,yes,skip,third-party licensed product
+NFC card hardware,hardware,skip,yes,skip,physical hardware
