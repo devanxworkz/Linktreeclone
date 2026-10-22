@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Pehchaan
 
 A multi-tenant **link-in-bio SaaS for Indian creators** — one fast, mobile-first
@@ -235,3 +236,7 @@ non-owner role, and the remaining production requirements.
 
 _This is a demonstration product. Branding, copy and assets are original. Names
 in sample data are fictional._
+=======
+# Linktreeclone
+>>>>>>> a3ea053ce200ce3b37873f82e2dc876fc77575ff
+"# Linktreeclone" 
