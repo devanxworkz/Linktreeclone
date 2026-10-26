@@ -40,6 +40,12 @@ export const config = {
   // Optional bootstrap admin. If set and no admin exists, seed creates one.
   adminEmail: process.env.ADMIN_EMAIL ?? '',
   adminPassword: process.env.ADMIN_PASSWORD ?? '',
+  // Allow bootstrapping to promote an existing creator account to admin.
+  // Off by default so a pre-registered email cannot be silently escalated.
+  adminPromoteExisting: bool(process.env.ADMIN_PROMOTE_EXISTING, false),
+  // Allow bootstrapping to overwrite the admin password with ADMIN_PASSWORD.
+  // Use only to recover access, then remove the variable.
+  adminSyncPassword: bool(process.env.ADMIN_SYNC_PASSWORD, false),
 
   // Email (for password reset). If not configured, emails are not sent.
   // For Resend: set MAILER_TRANSPORT=resend, RESEND_API_KEY, and SMTP_FROM (must use a VERIFIED domain in Resend for production).

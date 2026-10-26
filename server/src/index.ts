@@ -8,6 +8,11 @@ console.log(`[server] database backend: ${db.kind}`);
 const applied = await migrate();
 if (applied.length) console.log(`[server] migrations applied: ${applied.join(', ')}`);
 
+// Create/repair the bootstrap admin from ADMIN_EMAIL / ADMIN_PASSWORD.
+// Runs in production too (a deploy has no shell to run `npm run seed`).
+const { ensureBootstrapAdmin } = await import('./db/bootstrap-admin.js');
+await ensureBootstrapAdmin();
+
 // Opt-in seed (used by local setup and end-to-end tests). Never runs in prod.
 if (!config.isProd && process.env.SEED_ON_BOOT === '1') {
   const { seed } = await import('./db/seed.js');

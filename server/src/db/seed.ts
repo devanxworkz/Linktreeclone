@@ -1,4 +1,3 @@
-import { config } from '../config.js';
 import {
   createAccount,
   findProfileByTenant,
@@ -8,6 +7,7 @@ import {
 import { createLink } from '../services/links.js';
 import { createProduct } from '../services/products.js';
 import { setPublished, updateProfile, updateTheme } from '../services/profile.js';
+import { ensureBootstrapAdmin } from './bootstrap-admin.js';
 
 /** A demo creator, seeded for local development only. Clearly labelled. */
 interface DemoCreator {
@@ -78,27 +78,8 @@ const DEMOS: DemoCreator[] = [
 ];
 
 export async function seed(): Promise<void> {
-  // Admin: only created when credentials are provided. Never a default password.
-  if (config.adminEmail && config.adminPassword) {
-    const existing = await findUserByEmail(config.adminEmail);
-    if (!existing) {
-      const { user } = await createAccount({
-        email: config.adminEmail,
-        password: config.adminPassword,
-        displayName: 'Platform Admin',
-        username: 'platform-admin',
-      });
-      // Promote to admin and leave the auto-created page unpublished.
-      const { getDb } = await import('./index.js');
-      const db = await getDb();
-      await db.query("update users set role = 'admin' where id = $1", [user.id]);
-      console.log(`[seed] created admin ${config.adminEmail}`);
-    } else {
-      console.log('[seed] admin already exists');
-    }
-  } else {
-    console.log('[seed] ADMIN_EMAIL / ADMIN_PASSWORD not set — skipping admin creation');
-  }
+  // Admin: created/repair via the same helper the server runs at boot.
+  await ensureBootstrapAdmin();
 
   for (const demo of DEMOS) {
     const existing = await findUserByEmail(demo.email);
