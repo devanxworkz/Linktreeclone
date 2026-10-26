@@ -10,17 +10,18 @@ export interface SessionUser {
   status: UserStatus;
 }
 
-export async function createSession(userId: string, userAgent?: string): Promise<{
+export async function createSession(userId: string, userAgent?: string | undefined | null): Promise<{
   token: string;
   expiresAt: Date;
 }> {
   const db = await getDb();
   const token = newSessionToken();
   const expiresAt = new Date(Date.now() + config.sessionTtlMs);
+  const ua = userAgent == null ? null : String(userAgent);
   await db.query(
     `insert into sessions (user_id, token_hash, user_agent, expires_at)
      values ($1, $2, $3, $4)`,
-    [userId, hashToken(token), userAgent ?? null, expiresAt],
+    [userId, hashToken(token), ua, expiresAt],
   );
   return { token, expiresAt };
 }
@@ -59,6 +60,11 @@ export async function deleteOtherSessions(userId: string, keepToken: string): Pr
     userId,
     hashToken(keepToken),
   ]);
+}
+
+export async function deleteAllSessionsForUser(userId: string): Promise<void> {
+  const db = await getDb();
+  await db.query('delete from sessions where user_id = $1', [userId]);
 }
 
 export async function purgeExpiredSessions(): Promise<void> {

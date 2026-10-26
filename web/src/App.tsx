@@ -12,6 +12,7 @@ import StaticPage from './pages/marketing/StaticPage';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
 import Overview from './pages/dashboard/Overview';
 import ProfileEditor from './pages/dashboard/ProfileEditor';
 import LinksManager from './pages/dashboard/LinksManager';
@@ -71,6 +72,7 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/forgot" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
 
       {/* Creator dashboard */}
       <Route

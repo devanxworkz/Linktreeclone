@@ -19,13 +19,23 @@ async function createPglite(): Promise<Db> {
   const { PGlite } = await import('@electric-sql/pglite');
   const dir = config.pgliteDataDir;
   let client: PGlite;
-  if (dir === ':memory' || dir === ':memory:' || dir === 'memory') {
-    client = new PGlite();
-  } else {
-    mkdirSync(dir, { recursive: true });
-    client = new PGlite(dir);
+  try {
+    if (dir === ':memory' || dir === ':memory:' || dir === 'memory') {
+      client = new PGlite();
+    } else {
+      mkdirSync(dir, { recursive: true });
+      client = new PGlite(dir);
+    }
+    await client.waitReady;
+  } catch (err: any) {
+    const message = err?.message || String(err);
+    throw new Error(
+      `Failed to initialize PGlite at "${dir}". This is usually caused by a corrupted/incompatible pgdata from a previous PGlite version.\n` +
+      `To preserve existing data, copy "${dir}" to a backup (e.g. "${dir}.corrupt-<timestamp>") and inspect it.\n` +
+      `If you explicitly want to start fresh after backing up, you can rename/remove the directory, but I will not do that without your confirmation.\n` +
+      `Original error: ${message}`,
+    );
   }
-  await client.waitReady;
 
   return {
     kind: 'pglite',

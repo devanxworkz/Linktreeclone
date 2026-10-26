@@ -2,22 +2,26 @@ import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthLayout } from '../../components/AuthLayout';
 import { Button, Field, Input } from '../../components/ui';
+import { ApiError, api } from '../../lib/api';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
-  function onSubmit(e: FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
+    setError(null);
     setBusy(true);
-    // This build has no email delivery configured. We deliberately do not
-    // reveal whether the address exists, and we tell the truth about the
-    // limitation rather than pretending a reset link was sent.
-    window.setTimeout(() => {
+    try {
+      await api.post('/api/auth/forgot-password', { email });
       setSent(true);
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'Could not send reset instructions.');
+    } finally {
       setBusy(false);
-    }, 300);
+    }
   }
 
   return (
@@ -33,16 +37,20 @@ export default function ForgotPassword() {
       {sent ? (
         <div role="status" className="space-y-3 text-sm">
           <p className="rounded-md border border-border bg-surface px-3 py-3 text-text">
-            If an account exists for <strong>{email}</strong>, a reset would be sent there.
+            If an account exists for <strong>{email}</strong>, a reset link has been sent.
           </p>
           <p className="text-text-muted">
-            Note: email delivery is not configured in this demonstration build, so no message was
-            actually sent. A production deployment connects an email provider here. If you are
-            already signed in, you can change your password from Account settings.
+            Check your inbox and spam folder. The link expires in one hour and can only be used
+            once.
           </p>
         </div>
       ) : (
         <form onSubmit={onSubmit} noValidate className="space-y-4">
+          {error && (
+            <div role="alert" className="rounded-md border border-danger/30 bg-red-50 px-3 py-2 text-sm text-danger">
+              {error}
+            </div>
+          )}
           <Field label="Email" htmlFor="email">
             <Input
               id="email"
@@ -55,7 +63,7 @@ export default function ForgotPassword() {
             />
           </Field>
           <Button type="submit" className="w-full" disabled={busy}>
-            {busy ? 'Checking…' : 'Send reset instructions'}
+            {busy ? 'Sending…' : 'Send reset instructions'}
           </Button>
         </form>
       )}
