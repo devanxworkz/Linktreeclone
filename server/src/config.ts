@@ -21,6 +21,12 @@ export const config = {
   sessionCookieName: process.env.SESSION_COOKIE_NAME ?? 'pehchaan_session',
   // 30 days.
   sessionTtlMs: Number(process.env.SESSION_TTL_MS ?? 1000 * 60 * 60 * 24 * 30),
+  // Cookie SameSite policy. Production defaults to 'none' because the SPA and the
+  // API are commonly deployed on different sites (e.g. Vercel + Render), where a
+  // 'lax' cookie is never sent on cross-site fetches and the session appears lost.
+  // 'none' requires HTTPS (secure cookies). Override with SESSION_COOKIE_SAME_SITE.
+  sessionCookieSameSite: ((process.env.SESSION_COOKIE_SAME_SITE ??
+    (NODE_ENV === 'production' ? 'none' : 'lax')).toLowerCase()) as 'lax' | 'none' | 'strict',
 
   // Public base URL, used to build the shareable creator URL.
   publicBaseUrl: (process.env.PUBLIC_BASE_URL ?? 'http://localhost:5173').replace(/\/$/, ''),
